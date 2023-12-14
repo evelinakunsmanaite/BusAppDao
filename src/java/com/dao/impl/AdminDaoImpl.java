@@ -4,8 +4,10 @@
  */
 package com.dao.impl;
 
-import com.dao.BusDao;
-import com.model.Bus;
+import com.dao.AdminDao;
+import com.dao.UserDao;
+import com.model.Admin;
+import com.model.User;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,38 +20,33 @@ import javax.sql.DataSource;
  *
  * @author Administrator
  */
-public class BusDaoImpl implements BusDao {
-
+public class AdminDaoImpl implements AdminDao{
     private final DataSource dataSource;
 
-    public BusDaoImpl(DataSource dataSource) {
+    public AdminDaoImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     @Override
-    public Set<Bus> read() {
-        String req = "Select * from bus";
-        Set<Bus> buss;
+    public Set<Admin> read() {
+String req = "Select * from admin";
+        Set<Admin> admin;
         try (Connection conn = dataSource.getConnection()) {
             try (Statement statement = conn.createStatement(); ResultSet resultSet = statement.executeQuery(req)) {
-                buss = new HashSet<>();
+                admin = new HashSet<>();
                 while (resultSet.next()) {//пока есть записи 
                     int id = resultSet.getInt("id");
-                    String driverName = resultSet.getString("driver_name");
-                    String busNumber = resultSet.getString("bus_number");
-                    String routeNumber = resultSet.getString("route_number");
-                    String brand = resultSet.getString("brand");
-                    int yearOfService = resultSet.getInt("year_of_service");
-                    int mileage = resultSet.getInt("mileage");
-
-                    buss.add(new Bus(id, driverName, busNumber, routeNumber, brand, yearOfService, mileage));
+                    String login = resultSet.getString("login");
+                    String password = resultSet.getString("password");
+             
+                    admin.add(new Admin(id, login, password));
                 }
             }
-            return buss;
+            return admin;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
-        }
-    }
+        }    }
 
+   
 }

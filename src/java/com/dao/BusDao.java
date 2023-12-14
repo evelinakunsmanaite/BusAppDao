@@ -12,11 +12,7 @@ import java.util.Set;
  * @author Administrator
  */
 public interface BusDao {
-    boolean create(Bus bus);
 
     Set<Bus> read();
 
-    boolean update();
-
-    boolean delete(int id);
 }

@@ -12,11 +12,11 @@ import java.util.Set;
  * @author Administrator
  */
 public interface ScheduleDao {
-    boolean create(Schedule schedule);
+    int create(Schedule schedule);
 
     Set<Schedule> read();
 
-    boolean update();
+    int update(Schedule schedule);
 
-    boolean delete(int id);
+    int delete(Schedule schedule);
 }

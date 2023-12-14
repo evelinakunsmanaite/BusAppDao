@@ -4,15 +4,13 @@
  */
 package com.dao;
 
-import com.model.User;
+import com.model.Admin;
 import java.util.Set;
 
 /**
  *
  * @author Administrator
  */
-public interface UserDao {
-
-    Set<User> read();
-
+  public interface AdminDao {
+    Set<Admin> read();
 }
