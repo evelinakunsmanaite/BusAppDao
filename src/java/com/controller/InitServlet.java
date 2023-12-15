@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.dao.AdminDao;
 import com.dao.ScheduleDao;
 import com.dao.impl.ScheduleDaoImpl;
 import com.service.ScheduleService;
@@ -11,8 +12,11 @@ import com.service.UserService;
 import com.service.impl.UserServiceImpl;
 
 import com.dao.BusDao;
+import com.dao.impl.AdminDaoImpl;
 import com.dao.impl.BusDaoImpl;
+import com.service.AdminService;
 import com.service.BusService;
+import com.service.impl.AdminServiceImpl;
 import com.service.impl.BusServiceImpl;
 
 import javax.sql.DataSource;
@@ -32,6 +36,9 @@ public abstract class InitServlet extends HttpServlet {
     
     protected ScheduleDao scheduleDao;
     protected ScheduleService scheduleService;
+    
+     protected AdminDao adminDao;
+    protected AdminService adminService;
 
     @Override
     public void init() {//инициализация объектов с которыми работает сервлеты
@@ -43,5 +50,8 @@ public abstract class InitServlet extends HttpServlet {
         
         scheduleDao = new ScheduleDaoImpl(dataSource);
         scheduleService = new ScheduleServiceImpl(scheduleDao);
+        
+        adminDao = new AdminDaoImpl(dataSource);
+        adminService = new AdminServiceImpl(adminDao);
     }
 }

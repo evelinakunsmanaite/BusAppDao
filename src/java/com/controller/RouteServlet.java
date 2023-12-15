@@ -1,42 +1,39 @@
-//package com.controller;
-//
-//import com.model.Bus;
-//import com.model.BusList;
-//import java.io.IOException;
-//import java.util.ArrayList;
-//import javax.servlet.RequestDispatcher;
-//import javax.servlet.ServletException;
-//import javax.servlet.annotation.WebServlet;
-//import javax.servlet.http.HttpServlet;
-//import javax.servlet.http.HttpServletRequest;
-//import javax.servlet.http.HttpServletResponse;
-//
-//@WebServlet(name = "RouteServlet", urlPatterns = {"/routeServlet"})
-//public class RouteServlet extends HttpServlet {
-//
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        try {
-//            Bus[] buses = BusList.getBuses();
-//            ArrayList<Bus> result = new ArrayList<>();
-//            String routeNumber = request.getParameter("routeNumber");
-//            for (Bus bus : buses) {
-//                if (bus.getRouteNumber().equals(routeNumber)) {
-//                    result.add(bus);
-//                    System.out.println(bus);
-//                }
-//
-//            }
-//            request.setAttribute("result", result);
-//            RequestDispatcher rd = getServletContext()
-//                    .getRequestDispatcher("/WEB-INF/jsp/result.jsp");
-//            rd.forward(request, response);
-//        } catch (Exception e) {
-//            request.setAttribute("error", "Ошибка ввода данных");
-//            RequestDispatcher rd = getServletContext()
-//                    .getRequestDispatcher("/WEB-INF/jsp/error.jsp");
-//            rd.forward(request, response);
-//        }
-//    }
-//}
+package com.controller;
+
+import com.model.Bus;
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "RouteServlet", urlPatterns = {"/routeServlet"})
+public class RouteServlet extends InitServlet implements Jumpable {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {       
+            
+            String routeNumber = request.getParameter("routeNumber");
+            
+            List<Bus> result = busService.route(routeNumber);
+
+        if (!result.isEmpty()) {
+            request.setAttribute("result", result);
+            jump("/WEB-INF/jsp/result.jsp", request, response);
+        } else {
+
+            Locale userLocale = request.getLocale();
+
+            ResourceBundle bundle = ResourceBundle.getBundle("com.localization.messages.msg", userLocale);
+
+            String failureMessage = bundle.getString("error.dataNotExist");
+
+            request.setAttribute("error", failureMessage);
+            jump("/WEB-INF/jsp/error.jsp", request, response);
+        }
+    }
+}

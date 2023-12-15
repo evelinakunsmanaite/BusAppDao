@@ -7,38 +7,48 @@ package com.service.impl;
 import com.dao.BusDao;
 import com.model.Bus;
 import com.service.BusService;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author Administrators
  */
-public class BusServiceImpl implements BusService{
-        BusDao dao;
+public class BusServiceImpl implements BusService {
+
+    BusDao dao;
 
     public BusServiceImpl(BusDao dao) {
         this.dao = dao;
     }
 
     @Override
-    public boolean create(Bus bus) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public Set<Bus> read() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return dao.read();
     }
 
     @Override
-    public boolean update() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Bus> explore(int exp) {
+        return dao.read().stream()
+                .filter(bus -> (2023 - bus.getYearOfService() >= exp && exp != 0)
+                || (2023 - bus.getYearOfService() == exp && exp == 0))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Bus> mileage(int mlg) {
+        return dao.read().stream()
+                .filter(bus -> (bus.getMileage() >= mlg && mlg != 0)
+                || (2023 - bus.getMileage() == mlg && mlg == 0))
+                .collect(Collectors.toList());
     }
-   
-    
+
+    @Override
+    public List<Bus> route(String routeNumber) {
+        return dao.read().stream()
+                .filter(bus -> bus.getRouteNumber().equals(routeNumber))
+                .collect(Collectors.toList());
+    }
+
 }

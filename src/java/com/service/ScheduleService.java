@@ -5,6 +5,7 @@
 package com.service;
 
 import com.model.Schedule;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,7 +17,9 @@ public interface ScheduleService {
 
     Set<Schedule> read();
 
-    boolean update();
+    boolean update(int id, String routeNumber, String schedule);
 
     boolean delete(int id);
+    
+    List<Schedule> route(String routeNumber);
 }

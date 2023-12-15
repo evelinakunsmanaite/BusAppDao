@@ -5,6 +5,7 @@
 package com.service;
 
 import com.model.Bus;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -12,11 +13,13 @@ import java.util.Set;
  * @author Administrator
  */
 public interface BusService {
-    boolean create(Bus bus);
 
     Set<Bus> read();
+    
+    List<Bus> explore(int exp);
+    
+    List<Bus> mileage(int mlg);
+    
+    List<Bus> route(String routeNumber);
 
-    boolean update();
-
-    boolean delete(int id);
 }

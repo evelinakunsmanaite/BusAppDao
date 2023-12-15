@@ -16,6 +16,10 @@ private int id;
         this.routeNumber = routeNumber;
         this.schedule = schedule;
     }
+    
+     public Schedule(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;
