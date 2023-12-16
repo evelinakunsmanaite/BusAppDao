@@ -85,7 +85,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
     @Override
     public int update(Schedule schedule) {
         try (Connection conn = dataSource.getConnection()) {
-            String query = "UPDATE customers SET route_number =?,schedule =? WHERE id =?";
+            String query = "UPDATE schedules SET route_number =?,schedule =? WHERE id =?";
             try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
                 preparedStatement.setString(1, schedule.getRouteNumber());
                 preparedStatement.setString(2, schedule.getSchedule());

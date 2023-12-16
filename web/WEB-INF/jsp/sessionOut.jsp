@@ -6,11 +6,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <style>
-        <%@include file="/resources/css/logincss.css"%>
-    </style> 
+
     <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
     <fmt:bundle basename="com.localization.messages.msg">
+            <style>
+                <%@include file="/resources/css/myStyle.css"%>
+            </style>
 </head>
 <body align="center">
     <h1 style='color:red; '><fmt:message key="sessionOut" /></h1>

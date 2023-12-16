@@ -9,9 +9,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
     <fmt:bundle basename="com.localization.messages.msg">
-       <style>
-            <%@include file="/resources/css/logincss.css"%>
-        </style>
+  <style>
+        <%@include file="/resources/css/myStyle.css"%>
+    </style>
 </head>
 <body>
 <div class="signin-form">
@@ -19,12 +19,12 @@
     <ul class="nav-menu">
         <li>
             <a href="AddServlet" method="post">
-                <i class="fas fa-plus"></i> <fmt:message key="addPatient" />
+                <i class="fas fa-plus"></i> <fmt:message key="add" />
             </a>
         </li>
         <li>
             <a href="ReadServlet">
-                <i class="fas fa-user"></i> <fmt:message key="readPatient" />
+                <i class="fas fa-user"></i> <fmt:message key="read" />
             </a>
         </li>
     </ul>

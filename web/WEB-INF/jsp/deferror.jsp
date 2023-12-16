@@ -9,6 +9,9 @@
     
     <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
     <fmt:bundle basename="com.localization.messages.msg">
+        <style>
+        <%@include file="/resources/css/myStyle.css"%>
+    </style>
 
 </head>
 <body>
@@ -29,9 +32,10 @@
                 <fmt:param value="${pageContext.errorData.requestURI}"/>
             </fmt:message>
         </h3>
-        <form action="index.html">
-            <input type="submit" class="submit" value='<fmt:message key="toHomepage"/>'/>
-        </form>
+         <form action="page" method="post">
+            <input type="hidden" name="page" value="toLogin">
+            <input type="submit" value="<fmt:message key="toHomepage" />">
+        </form>  
     </div>
 </body>
 </fmt:bundle>

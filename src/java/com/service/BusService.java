@@ -22,4 +22,5 @@ public interface BusService {
     
     List<Bus> route(String routeNumber);
 
+    List<String> getBus();
 }

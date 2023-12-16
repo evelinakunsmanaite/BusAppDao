@@ -51,4 +51,11 @@ public class BusServiceImpl implements BusService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<String> getBus() {
+        return dao.read().stream()
+                .map(Bus::getRouteNumber)
+                .distinct()
+                .collect(Collectors.toList());
+    }
 }
